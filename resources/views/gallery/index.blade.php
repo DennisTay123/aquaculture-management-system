@@ -13,12 +13,12 @@
 
     <form action="{{ route('gallery.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="form-group">
+        <div>
             <input type="file" name="media[]" id="media" class="form-control d-none" multiple required>
             <button type="button" class="btn btn-secondary" id="chooseFileBtn">Choose Files</button>
             <span id="file-names"></span>
         </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
+        <button type="submit" class="btn btn-primary">Upload</button> Maximum file size: 20MB
     </form>
 
     <form id="multiDeleteForm" action="{{ route('gallery.multiDelete') }}" method="POST">
