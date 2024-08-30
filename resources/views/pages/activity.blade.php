@@ -27,7 +27,7 @@
                                 <th>City</th>
                                 <th class="text-right">Salary</th>
                             </thead>
-                            <tbody>
+                            <tbody class="tbody">
                                 <tr>
                                     <td>Dakota Rice</td>
                                     <td>Niger</td>
@@ -91,7 +91,7 @@
                                 <th>City</th>
                                 <th class="text-right">Salary</th>
                             </thead>
-                            <tbody>
+                            <tbody class="tbody">
                                 <tr>
                                     <td>Dakota Rice</td>
                                     <td>Niger</td>

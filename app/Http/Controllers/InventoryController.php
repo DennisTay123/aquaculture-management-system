@@ -8,10 +8,34 @@ use Illuminate\Http\Request;
 
 class InventoryController extends Controller
 {
-    public function index(Inventory $model)
+    public function index(Request $request)
     {
-        $inventories = $model->paginate(15);
-        return view('inventory.index', compact('inventories'));
+        $query = Inventory::query();
+
+        if ($request->has('search') && $request->search) {
+            $query->where('name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('item_code', 'LIKE', '%' . $request->search . '%');
+        }
+
+        if ($request->has('brand') && $request->brand) {
+            $query->where('brand', $request->brand);
+        }
+
+        if ($request->has('vendor_id') && $request->vendor_id) {
+            $query->where('vendor_id', $request->vendor_id);
+        }
+
+        if ($request->has('date') && $request->date) {
+            $query->whereDate('created_at', $request->date);
+        }
+
+        $inventories = $query->paginate(10);
+
+        $brands = Inventory::select('brand')->distinct()->pluck('brand');
+        $categories = Inventory::select('category')->distinct()->pluck('category');
+        $vendors = Vendor::all();
+
+        return view('inventory.index', compact('inventories', 'brands', 'categories', 'vendors'));
     }
 
     public function create()
@@ -42,7 +66,8 @@ class InventoryController extends Controller
 
     public function show(Inventory $inventory)
     {
-        return view('inventory.show', compact('inventory'));
+        $vendors = Vendor::all();
+        return view('inventory.show', compact('inventory', 'vendors'));
     }
 
     public function edit(Inventory $inventory)
@@ -68,7 +93,8 @@ class InventoryController extends Controller
 
         $inventory->update($request->all());
 
-        return redirect()->route('inventories.index')->with('success', 'Inventory updated successfully.');
+        return redirect()->route('inventories.show', $inventory->id)
+            ->with('success', 'Inventory updated successfully');
     }
 
     public function destroy(Inventory $inventory)

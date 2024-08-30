@@ -11,14 +11,26 @@
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col-8">
+                            <div class="col-6">
                                 <h3 class="mb-0">Vendors</h3>
                             </div>
-                            <div class="col-4 text-right">
-                                <a href="{{ route('vendors.create') }}" class="btn btn-primary">Add new
-                                    vendor</a>
+                            <div class="col-3">
+                                <form method="GET" action="{{ route('vendors.index') }}" class="mt-3">
+                                    <div class="input-group">
+                                        <input type="text" name="search" class="form-control"
+                                            placeholder="Search for vendors">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"
+                                                style="margin: 0px;">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-3 text-right">
+                                <a href="{{ route('vendors.create') }}" class="btn btn-primary">Add new vendor</a>
                             </div>
                         </div>
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -34,7 +46,7 @@
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="tbody">
                                     @foreach ($vendors as $vendor)
                                         <tr>
                                             <td>{{ $vendor->id }}</td>
@@ -46,8 +58,6 @@
                                             <td>
                                                 <a href="{{ route('vendors.show', $vendor->id) }}"
                                                     class="btn btn-info">Details</a>
-                                                <!-- <a href="{{ route('vendors.edit', $vendor->id) }}"
-                                                                class="btn btn-primary">Edit</a> -->
                                                 <form action="{{ route('vendors.destroy', $vendor->id) }}" method="POST"
                                                     style="display:inline-block;">
                                                     @csrf

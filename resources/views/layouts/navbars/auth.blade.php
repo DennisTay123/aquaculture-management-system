@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="white" data-active-color="danger">
+<div class="sidebar" data-color="black" data-active-color="info">
     <div class="logo">
         <a class="simple-text logo-mini">
             <div class="logo-image-small">
@@ -6,7 +6,7 @@
             </div>
         </a>
         <a class="simple-text logo-normal">
-            {{ __('XXX System') }}
+            {{ __('Aquaculture') }}
         </a>
     </div>
 
@@ -20,7 +20,8 @@
                 </a>
             </li> -->
 
-            <li class="{{ $elementActive == 'dashboard' || $elementActive == 'monitor' ? 'active' : '' }}">
+            <li
+                class="{{ $elementActive == 'dashboard' || $elementActive == 'monitor' || $elementActive == 'aquaculture' ? 'active' : '' }}">
                 <a data-toggle="collapse" aria-expanded="true" href="#Dashboard">
                     <i class="nc-icon nc-bank"></i>
                     <p>
@@ -40,6 +41,12 @@
                             <a href="{{ route('page.index', 'monitor') }}">
                                 <span class="sidebar-mini-icon">{{ __('M') }}</span>
                                 <span class="sidebar-normal">{{ __('Monitor') }}</span>
+                            </a>
+                        </li>
+                        <li class="{{ $elementActive == 'waterQuality' ? 'active' : '' }}">
+                            <a href="{{ route('page.index', 'water-quality') }}">
+                                <span class="sidebar-mini-icon">{{ __('W') }}</span>
+                                <span class="sidebar-normal">{{ __('Water Quality') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -77,8 +84,8 @@
                     <i class="nc-icon nc-diamond"></i>
                     <p>{{ __('Icons') }}</p>
                 </a>
-            </li>
-            <li class="{{ $elementActive == 'map' ? 'active' : '' }}">
+            </li> -->
+            <!-- <li class="{{ $elementActive == 'map' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'map') }}">
                     <i class="nc-icon nc-pin-3"></i>
                     <p>{{ __('Maps') }}</p>
@@ -152,17 +159,17 @@
                                 <span class="sidebar-normal">{{ __(' Activity') }}</span>
                             </a>
                         </li>
-                        <!-- <li class="{{ $elementActive == 'register' ? 'active' : '' }}">
-                            <a href="{{ route('page.index', 'user') }}">
-                                <span class="sidebar-mini-icon">{{ __('R') }}</span>
-                                <span class="sidebar-normal">{{ __(' Register User') }}</span>
+                        <li class="{{ $elementActive == 'gallery' ? 'active' : '' }}">
+                            <a href="{{ route('page.index', 'gallery') }}">
+                                <span class="sidebar-mini-icon">{{ __('G') }}</span>
+                                <span class="sidebar-normal">{{ __(' Gallery') }}</span>
                             </a>
-                        </li> -->
+                        </li>
                     </ul>
                 </div>
             </li>
 
-            <li class="{{ $elementActive == 'account' || $elementActive == 'list' ? 'active' : '' }}">
+            <li class="{{ $elementActive == 'user' || $elementActive == 'register' ? 'active' : '' }}">
                 <a data-toggle="collapse" aria-expanded="true" href="#accountManagement">
                     <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i>
                     <p>
@@ -172,14 +179,14 @@
                 </a>
                 <div class="collapse show" id="accountManagement">
                     <ul class="nav">
-                        <li class="{{ $elementActive == 'list' ? 'active' : '' }}">
-                            <a href="{{ route('page.index', 'userlist') }}">
+                        <li class="{{ $elementActive == 'user' ? 'active' : '' }}">
+                            <a href="{{ route('page.index', 'user') }}">
                                 <span class="sidebar-mini-icon">{{ __('L') }}</span>
                                 <span class="sidebar-normal">{{ __(' User List ') }}</span>
                             </a>
                         </li>
                         <li class="{{ $elementActive == 'register' ? 'active' : '' }}">
-                            <a href="{{ route('page.index', 'user') }}">
+                            <a href="{{ route('page.index', 'register/initiate') }}">
                                 <span class="sidebar-mini-icon">{{ __('R') }}</span>
                                 <span class="sidebar-normal">{{ __(' Register User') }}</span>
                             </a>

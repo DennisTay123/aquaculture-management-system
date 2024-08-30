@@ -21,7 +21,7 @@
                                     <th class="text-center">Free</th>
                                     <th class="text-center">PRO</th>
                                 </thead>
-                                <tbody>
+                                <tbody class="tbody">
                                     <tr>
                                         <td>
                                             <h3 class="text-primary mb-0 mt-3">Laravel</h3>

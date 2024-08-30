@@ -41,7 +41,13 @@ The above copyright notice and this permission notice shall be included in all c
     <link href="{{ asset('paper') }}/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('paper') }}/demo/demo.css" rel="stylesheet" />
+    <!-- bootstrap-datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
+    @include('flatpickr::components.style')
+
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/main.min.css" rel="stylesheet">
+    
 </head>
 
 <body class="{{ $class }}">
@@ -72,10 +78,18 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="{{ asset('paper') }}/demo/demo.js"></script>
     <!-- Sharrre libray -->
     <script src="../assets/demo/jquery.sharrre.js"></script>
+    <!-- bootstrap-datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     
     @stack('scripts')
 
     @include('layouts.navbars.fixed-plugin-js')
+    @include('flatpickr::components.script')
+
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/main.min.js"></script>
+    
+</body>
 </body>
 
 </html>

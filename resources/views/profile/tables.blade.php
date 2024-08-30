@@ -28,7 +28,7 @@
                                         Salary
                                     </th>
                                 </thead>
-                                <tbody>
+                                <tbody class="tbody">
                                     <tr>
                                         <td>
                                             Dakota Rice
@@ -156,7 +156,7 @@
                                         Salary
                                     </th>
                                 </thead>
-                                <tbody>
+                                <tbody class="tbody">
                                     <tr>
                                         <td>
                                             Dakota Rice

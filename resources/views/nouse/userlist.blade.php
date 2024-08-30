@@ -32,7 +32,7 @@
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tbody">
                                 @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $user->name }}</td>

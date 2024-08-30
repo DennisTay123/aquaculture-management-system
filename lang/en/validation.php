@@ -142,8 +142,27 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'string' => 'The name must be a string.',
+            'max' => 'The name must not be greater than :max characters.',
+        ],
+        'contact_number' => [
+            'regex' => 'The contact number format is invalid.',
+            'max' => 'The contact number must not be greater than :max characters.',
+        ],
+        'password' => [
+            'string' => 'The password must be a string.',
+            'min' => 'The password must be at least :min characters.',
+            'confirmed' => 'The password confirmation does not match.',
+            'regex' => [
+                'regex:/[a-z]/' => 'The password must contain at least one lowercase letter.',
+                'regex:/[A-Z]/' => 'The password must contain at least one uppercase letter.',
+                'regex:/[0-9]/' => 'The password must contain at least one number.',
+                'regex:/[@$!%*#?&]/' => 'The password must contain at least one special character (@, $, !, %, *, #, ?, &).'
+            ],
+        ],
+        'agree_terms_and_conditions' => [
+            'accepted' => 'You must accept the terms and conditions.',
         ],
     ],
 
@@ -158,6 +177,13 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'Name',
+        'contact_number' => 'Contact Number',
+        'address' => 'Address',
+        'password' => 'Password',
+        'password_confirmation' => 'Password Confirmation',
+        'agree_terms_and_conditions' => 'Terms and Conditions',
+    ],
 
 ];
