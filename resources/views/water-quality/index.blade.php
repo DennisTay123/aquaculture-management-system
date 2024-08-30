@@ -23,13 +23,13 @@
                                     <label for="do_operator"><strong>DO Filter:</strong></label>
                                     <div class="input-group" style="margin: 0">
                                         <select name="do_operator" class="form-control-sm border"
-                                            style="border-radius: 0.25rem;">
+                                            style="border-radius: 0.25rem;height: 2.5rem;">
                                             <option value=">" {{ request('do_operator') == '>' ? 'selected' : '' }}>&gt;
                                             </option>
                                             <option value="<" {{ request('do_operator') == '<' ? 'selected' : '' }}>&lt;
                                             </option>
                                         </select>
-                                        <input type="text" name="do_value" class="form-control-sm border"
+                                        <input type="text" name="do_value" class="form-control border"
                                             style="border-radius: 0.25rem;" placeholder="DO Value"
                                             value="{{ request('do_value') }}">
                                     </div>
@@ -42,11 +42,11 @@
                                     <label for="temperature_operator"><strong>Temperature Filter:</strong></label>
                                     <div class="input-group" style="margin: 0">
                                         <select name="temperature_operator" class="form-control-sm border"
-                                            style="border-radius: 0.25rem;">
+                                            style="border-radius: 0.25rem;height: 2.5rem;">
                                             <option value=">" {{ request('temperature_operator') == '>' ? 'selected' : '' }}>&gt;</option>
                                             <option value="<" {{ request('temperature_operator') == '<' ? 'selected' : '' }}>&lt;</option>
                                         </select>
-                                        <input type="text" name="temperature_value" class="form-control-sm border"
+                                        <input type="text" name="temperature_value" class="form-control border"
                                             style="border-radius: 0.25rem;" placeholder="Temperature Value"
                                             value="{{ request('temperature_value') }}">
                                     </div>
@@ -59,13 +59,13 @@
                                     <label for="ph_operator"><strong>pH Filter:</strong></label>
                                     <div class="input-group" style="margin: 0">
                                         <select name="ph_operator" class="form-control-sm border"
-                                            style="border-radius: 0.25rem;">
+                                            style="border-radius: 0.25rem;height: 2.5rem;">
                                             <option value=">" {{ request('ph_operator') == '>' ? 'selected' : '' }}>&gt;
                                             </option>
                                             <option value="<" {{ request('ph_operator') == '<' ? 'selected' : '' }}>&lt;
                                             </option>
                                         </select>
-                                        <input type="text" name="ph_value" class="form-control-sm border"
+                                        <input type="text" name="ph_value" class="form-control border"
                                             style="border-radius: 0.25rem;" placeholder="pH Value"
                                             value="{{ request('ph_value') }}">
                                     </div>
@@ -78,13 +78,13 @@
                                     <label for="ammonia_operator"><strong>Ammonia Filter:</strong></label>
                                     <div class="input-group" style="margin: 0">
                                         <select name="ammonia_operator" class="form-control-sm border"
-                                            style="border-radius: 0.25rem;">
+                                            style="border-radius: 0.25rem; height: 2.5rem;">
                                             <option value=">" {{ request('ammonia_operator') == '>' ? 'selected' : '' }}>
                                                 &gt;</option>
                                             <option value="<" {{ request('ammonia_operator') == '<' ? 'selected' : '' }}>
                                                 &lt;</option>
                                         </select>
-                                        <input type="text" name="ammonia_value" class="form-control-sm border"
+                                        <input type="text" name="ammonia_value" class="form-control border"
                                             style="border-radius: 0.25rem;" placeholder="Ammonia Value"
                                             value="{{ request('ammonia_value') }}">
                                     </div>
@@ -98,7 +98,7 @@
                                 <div class="form-group mb-0">
                                     <label for="start_date" class="mb-1"><strong>From:</strong></label>
                                     <input type="text" id="start_date" name="start_date"
-                                        class="form-control-sm border datepicker" style="border-radius: 0.25rem;"
+                                        class="form-control border datepicker" style="border-radius: 0.25rem;"
                                         placeholder="Start Date" value="{{ request('start_date') }}">
                                 </div>
                             </div>
@@ -106,16 +106,17 @@
                                 <div class="form-group mb-0">
                                     <label for="end_date" class="mb-1"><strong>To:</strong></label>
                                     <input type="text" id="end_date" name="end_date"
-                                        class="form-control-sm border datepicker" style="border-radius: 0.25rem;"
+                                        class="form-control border datepicker" style="border-radius: 0.25rem;"
                                         placeholder="End Date" value="{{ request('end_date') }}">
                                 </div>
                             </div>
-                            <div class="col-md-6 d-flex align-items-center">
-                                <button type="submit" class="btn btn-primary btn-sm"
-                                    style="border-radius: 0.25rem; margin-right: 10px;">Filter</button>
-                                <a href="{{ route('waterQuality.index') }}" class="btn btn-secondary btn-sm"
-                                    style="border-radius: 0.25rem;">Reset</a>
+
+
+                            <div class="col-md-6 d-flex" style="margin-top: 20px; margin-bottom: 0;">
+                                <button class="btn btn-primary mr-2" type="submit">Search</button>
+                                <a href="{{ route('inventories.index') }}" class="btn btn-secondary">Clear</a>
                             </div>
+
                         </div>
                     </form>
 

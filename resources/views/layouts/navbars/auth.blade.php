@@ -134,7 +134,7 @@
                             </a>
                         </li>
                         <li class="{{ $elementActive == 'vendor' ? 'active' : '' }}">
-                            <a href="{{ route('page.index', 'vendor') }}">
+                            <a href="{{ route('page.index', 'vendors') }}">
                                 <span class="sidebar-mini-icon">{{ __('V') }}</span>
                                 <span class="sidebar-normal">{{ __(' Vendor') }}</span>
                             </a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -14,15 +15,26 @@ class UserController extends Controller
      * @param  \App\Models\User  $model
      * @return \Illuminate\View\View
      */
-    public function index(User $model)
+    public function index(Request $request)
     {
-        // return view('users.index', [
-        //     'users' => $model->paginate(15),
-        //     'elementActive' => 'list'
-        // ]);
-        $users = User::paginate(15);
+        $query = User::query();
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('role', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('contact_number', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('address', 'LIKE', '%' . $request->search . '%');
+            });
+        }
+
+        $users = $query->paginate(10);
+
         return view('users.index', compact('users'));
     }
+
+
     /**
      * Show the form for creating a new user.
      *

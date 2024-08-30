@@ -30,25 +30,15 @@
                     <div class="card-body">
                         <form method="GET" action="{{ route('inventories.index') }}">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <label for="category"><strong>Search:</strong></label>
-                                    <input type="text" name="search" class="form-control" placeholder="Search...">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="category"><strong>Filter by Category:</strong></label>
-                                    <select name="category" class="form-control">
-                                        <option value="">None</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category }}">{{ $category }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+
                                 <div class="col-md-3">
                                     <label for="brand"><strong>Filter by Brand:</strong></label>
                                     <select name="brand" class="form-control">
                                         <option value="">None</option>
                                         @foreach($brands as $brand)
-                                            <option value="{{ $brand }}">{{ $brand }}</option>
+                                            <option value="{{ $brand }}" {{ request('brand') == $brand ? 'selected' : '' }}>
+                                                {{ $brand }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -57,20 +47,36 @@
                                     <select name="vendor_id" class="form-control">
                                         <option value="">None</option>
                                         @foreach($vendors as $vendor)
-                                            <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                                            <option value="{{ $vendor->id }}" {{ request('vendor_id') == $vendor->id ? 'selected' : '' }}>{{ $vendor->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="vendor_id"><strong>Filter by Date:</strong></label>
-                                    <div class="input-group-append date" data-provide="datepicker">
-                                        <input type="text" class="form-control" id="filter-date" name="date"
-                                            placeholder="Select a date..."
-                                            style="margin-bottom: 10px; margin-right: 10px;">
+                                    <label for="category"><strong>Filter by Category:</strong></label>
+                                    <select name="additional_category" class="form-control">
+                                        <option value="">None</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category }}" {{ request('additional_category') == $category ? 'selected' : '' }}>{{ $category }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="filter-date"><strong>Filter by Date:</strong></label>
+                                    <input type="text" class="form-control datepicker" id="filter-date" name="date"
+                                        placeholder="Select a date..." value="{{ request('date') }}">
+                                </div>
+                            </div>
 
-                                        <button class="btn btn-primary" type="submit" style="margin-top: 0px; "><i
-                                                class="nc-zoom-split"></i> Search</button>
-                                    </div>
+                            <div class="row mt-2">
+
+                                <div class="col-md-3">
+                                    <label for="search"><strong>Search:</strong></label>
+                                    <input type="text" name="search" class="form-control" placeholder="Search..."
+                                        value="{{ request('search') }}">
+                                </div>
+                                <div class="col-md-6 d-flex" style="margin-top: 20px; margin-bottom: 0;">
+                                    <button class="btn btn-primary mr-2" type="submit">Search</button>
+                                    <a href="{{ route('inventories.index') }}" class="btn btn-secondary">Clear</a>
                                 </div>
                             </div>
                         </form>
@@ -113,9 +119,12 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="pagination justify-content-end">
-                            {{ $inventories->links() }}
+                        <div class="card-footer py-4">
+                            <nav class="d-flex justify-content-center" aria-label="...">
+                                {{ $inventories->appends(request()->query())->links('pagination::bootstrap-4') }}
+                            </nav>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -123,15 +132,13 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('#filter-date').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            locale: {
-                format: 'YYYY-MM-DD'
-            }
+@push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr(".datepicker", {
+                dateFormat: "Y-m-d"
+            });
         });
-    });
-</script>
+    </script>
+@endpush
 @endsection

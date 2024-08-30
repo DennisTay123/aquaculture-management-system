@@ -12,20 +12,26 @@ class InventoryController extends Controller
     {
         $query = Inventory::query();
 
-        if ($request->has('search') && $request->search) {
-            $query->where('name', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('item_code', 'LIKE', '%' . $request->search . '%');
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('item_code', 'LIKE', '%' . $request->search . '%');
+            });
         }
 
-        if ($request->has('brand') && $request->brand) {
+        if ($request->filled('brand')) {
             $query->where('brand', $request->brand);
         }
 
-        if ($request->has('vendor_id') && $request->vendor_id) {
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        if ($request->filled('vendor_id')) {
             $query->where('vendor_id', $request->vendor_id);
         }
 
-        if ($request->has('date') && $request->date) {
+        if ($request->filled('date')) {
             $query->whereDate('created_at', $request->date);
         }
 
@@ -37,6 +43,7 @@ class InventoryController extends Controller
 
         return view('inventory.index', compact('inventories', 'brands', 'categories', 'vendors'));
     }
+
 
     public function create()
     {
