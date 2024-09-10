@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\AquacultureController;
-use App\Http\Controllers\MonitorController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\WaterQualityController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,84 +29,65 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes();
-
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-
-// Route::group(['middleware' => 'auth'], function () {
-// 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
-// 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
-// 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
-// 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
-// });
-
-// Route::group(['middleware' => 'auth'], function () {
-// 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
-// });
-
-use App\Http\Controllers\InventoryController;
-
-Route::get('/inventory', [InventoryController::class, 'index']);
-Route::resource('inventories', InventoryController::class);
-
-use App\Http\Controllers\VendorController;
-
-Route::get('/vendor', [VendorController::class, 'index']);
-Route::resource('vendors', VendorController::class);
-
-Route::get('/user', [UserController::class, 'index']);
-Route::resource('users', UserController::class);
-
-use App\Http\Controllers\WaterQualityController;
-
-Route::get('/water-quality', [WaterQualityController::class, 'index'])->name('waterQuality.index');
-
-
-use App\Http\Controllers\Auth\RegisterController;
-
-Route::get('register/initiate', [RegisterController::class, 'showInitiateRegistrationForm'])->name('register.initiate');
-Route::post('register/initiate', [RegisterController::class, 'sendRegistrationLink'])->name('register.initiate.send');
-Route::get('register/complete/{token}', [RegisterController::class, 'showCompleteRegistrationForm'])->name('register.complete');
-Route::post('register/complete/{token}', [RegisterController::class, 'completeRegistration'])->name('register.complete.store');
-Route::get('register/expired', function () {
-	return view('auth.expired');
-})->name('register.expired');
-
-use App\Http\Controllers\GalleryController;
-
-Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
-Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store');
-
-// Add this route for the multi-delete functionality
-Route::delete('/gallery/multi-delete', [GalleryController::class, 'multiDelete'])->name('gallery.multiDelete');
-
-// Resource route (except for the create, edit, update, show actions)
-Route::resource('gallery', GalleryController::class)->except(['create', 'edit', 'update', 'show']);
-
-
-
-Route::get('/activity', [ActivityController::class, 'index'])->name('activities.index');
-Route::get('/activities/create', [ActivityController::class, 'create'])->name('activities.create');
-Route::post('/activities/store', [ActivityController::class, 'store'])->name('activities.store');
-Route::get('/activities/events', [ActivityController::class, 'getEvents'])->name('activities.events');
-Route::resource('activities', ActivityController::class);
-
-
-
-
+// Routes for authenticated users only
 Route::group(['middleware' => 'auth'], function () {
-	// Route::get('register/initiate', [RegisterController::class, 'showInitiateRegistrationForm'])->name('register.initiate');
-	// Route::post('register/initiate', [RegisterController::class, 'sendRegistrationLink'])->name('register.initiate.send');
-	// Route::get('register/complete/{token}', [RegisterController::class, 'showCompleteRegistrationForm'])->name('register.complete');
-	// Route::post('register/complete/{token}', [RegisterController::class, 'completeRegistration'])->name('register.complete.store');
 
-	// Route::resource('userlist', UserController::class, ['except' => ['show']]);
+	// Dashboard route
+	Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+	Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
+
+	// Profile routes
 	Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
 	Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 	Route::put('profile/password', [ProfileController::class, 'password'])->name('profile.password');
+
+	// Inventory routes
+	Route::get('/inventory', [InventoryController::class, 'index']);
+	Route::resource('inventories', InventoryController::class);
+
+	// Vendor routes
+	Route::get('/vendor', [VendorController::class, 'index']);
+	Route::resource('vendors', VendorController::class);
+
+	// Water Quality routes
+	Route::get('/water-quality', [WaterQualityController::class, 'index'])->name('waterQuality.index');
+
+	// Activity routes
+	Route::get('/activity', [ActivityController::class, 'index'])->name('activity.index');
+	Route::get('/activity/events', [ActivityController::class, 'getEvents'])->name('activity.events');
+	Route::get('/activity/create', [ActivityController::class, 'create'])->name('activity.create');
+	Route::post('/activity/store', [ActivityController::class, 'store'])->name('activity.store');
+	Route::get('/activity/{id}', [ActivityController::class, 'show'])->name('activity.show');
+	Route::put('/activity/{id}', [ActivityController::class, 'update'])->name('activity.update');
+
+	// Gallery routes
+	Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+	Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store');
+	Route::delete('/gallery/multi-delete', [GalleryController::class, 'multiDelete'])->name('gallery.multiDelete');
+	Route::resource('gallery', GalleryController::class)->except(['create', 'edit', 'update', 'show']);
+
+	// User routes for account management
+	Route::resource('users', UserController::class);
+
+
+	// Pages routes
 	Route::get('{page}', [PageController::class, 'index'])->name('page.index');
+
+
+
 });
 
 
 
+// Routes for Admin or Manager only
+Route::group(['middleware' => ['auth', 'checkRole:Admin']], function () {
+
+
+
+
+	// Registration routes accessible by Admin/Manager
+	Route::get('register/initiate', [RegisterController::class, 'showInitiateRegistrationForm'])->name('register.initiate');
+	Route::post('register/initiate', [RegisterController::class, 'sendRegistrationLink'])->name('register.initiate.send');
+	Route::get('register/complete/{token}', [RegisterController::class, 'showCompleteRegistrationForm'])->name('register.complete');
+	Route::post('register/complete/{token}', [RegisterController::class, 'completeRegistration'])->name('register.complete.store');
+});

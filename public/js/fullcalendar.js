@@ -11118,37 +11118,36 @@ var css_248z = ":root{--fc-daygrid-event-dot-width:8px}.fc-daygrid-day-events:af
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
 /*!**************************************!*\
   !*** ./resources/js/fullcalendar.js ***!
   \**************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _fullcalendar_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/core */ "./node_modules/@fullcalendar/core/index.js");
-/* harmony import */ var _fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fullcalendar/daygrid */ "./node_modules/@fullcalendar/daygrid/index.js");
+/* harmony import */ var _fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/daygrid */ "./node_modules/@fullcalendar/daygrid/index.js");
 
 
 document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('calendar');
-  var calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_0__.Calendar(calendarEl, {
-    plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_0__["default"]],
     initialView: 'dayGridMonth',
-    events: '/activities/events',
-    // URL for fetching events from your controller
+    events: '/activity/events',
+    // Make sure this is correct
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    editable: false,
-    selectable: true,
+    editable: true,
+    dateClick: function dateClick(info) {
+      var selectedDate = info.dateStr;
+      window.location.href = '/activity/create?date=' + selectedDate;
+    },
     eventClick: function eventClick(info) {
-      alert('Event: ' + info.event.title);
+      var eventId = info.event.id;
+      window.location.href = '/activity/' + eventId;
     }
   });
   calendar.render();
 });
-})();
-
 /******/ })()
 ;

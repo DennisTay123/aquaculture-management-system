@@ -11,7 +11,7 @@
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col-6">
+                            <div class="col-9">
                                 <h3 class="mb-0">Users List</h3>
                             </div>
                             <div class="col-3">
@@ -26,9 +26,6 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-3 text-right">
-                                <a href="{{ route('users.create') }}" class="btn btn-primary">Add new user</a>
-                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -42,6 +39,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Contact Number</th>
                                         <th scope="col">Address</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tbody">
@@ -56,14 +54,14 @@
                                             <td>
                                                 <a href="{{ route('users.show', $user->id) }}"
                                                     class="btn btn-info">Details</a>
-                                                <!-- <a href="{{ route('users.edit', $user->id) }}"
-                                                                                                                            class="btn btn-primary">Edit</a> -->
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                    style="display:inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
+                                                @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Manager')
+                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                        style="display:inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

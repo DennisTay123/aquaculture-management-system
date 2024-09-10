@@ -14,6 +14,9 @@
                             <div class="col-6">
                                 <h3 class="mb-0">Activities Calendar</h3>
                             </div>
+                            <div class="col-6 text-right">
+                                <a href="{{ route('activity.create') }}" class="btn btn-primary">New Activity</a>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">

@@ -73,11 +73,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Price Per Unit</th>
+                                        <th>Quantity</th>
                                         <td>
-                                            <span class="view-mode">{{ $inventory->price }}</span>
-                                            <input type="number" step="0.01" name="price" class="form-control edit-mode"
-                                                value="{{ $inventory->price }}" style="display:none;">
+                                            <span class="view-mode">{{ $inventory->quantity }}</span>
+                                            <input type="number" name="quantity" class="form-control edit-mode"
+                                                value="{{ $inventory->quantity }}" style="display:none;">
                                         </td>
                                     </tr>
                                     <tr>
@@ -89,11 +89,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Quantity</th>
+                                        <th>Price Per Unit</th>
                                         <td>
-                                            <span class="view-mode">{{ $inventory->quantity }}</span>
-                                            <input type="number" name="quantity" class="form-control edit-mode"
-                                                value="{{ $inventory->quantity }}" style="display:none;">
+                                            <span class="view-mode">{{ $inventory->price }}</span>
+                                            <input type="number" step="0.01" name="price" class="form-control edit-mode"
+                                                value="{{ $inventory->price }}" style="display:none;">
                                         </td>
                                     </tr>
                                     <tr>

@@ -47,28 +47,30 @@ class InventoryController extends Controller
 
     public function create()
     {
+        // Define the available categories
+        $categories = ['Feed', 'Medicine', 'Equipment', 'Miscellaneous'];
         $vendors = Vendor::all();
-        return view('inventory.create', compact('vendors'));
+        return view('inventory.create', compact('vendors', 'categories'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'item_code' => 'required',
-            'name' => 'required',
-            'description' => 'nullable',
-            'category' => 'required',
-            'um' => 'required',
+            'item_code' => 'required|string|max:191',
+            'brand' => 'required|string|max:191',
+            'name' => 'required|string|max:191',
+            'description' => 'nullable|string',
+            'category' => 'required|string|max:191',
+            'um' => 'nullable|string|max:191',
             'quantity' => 'required|integer',
             'price' => 'required|numeric',
             'total_price' => 'required|numeric',
-            'brand' => 'required',
-            'vendor_id' => 'required|exists:vendors,id',
+            'vendor_id' => 'nullable|exists:vendors,id',
         ]);
 
         Inventory::create($request->all());
 
-        return redirect()->route('inventories.index')->with('success', 'Inventory created successfully.');
+        return redirect()->route('inventories.index')->with('success', 'Inventory item created successfully.');
     }
 
     public function show(Inventory $inventory)

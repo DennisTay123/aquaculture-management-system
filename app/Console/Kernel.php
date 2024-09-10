@@ -16,9 +16,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('fetch:thingspeak-data')->everyFiveMinutes();
+        // $schedule->command('fetch:thingspeak-data')->everyMinute();
+        // $schedule->command('fetch:thingspeak-data')->everyFiveMinutes();
         // $schedule->command('fetch:thingspeak-data')->everyTenMinutes();
-        // $schedule->command('fetch:thingspeak-data')->cron('*/15 * * * *');
+        $schedule->command('fetch:thingspeak-data')->cron('*/15 * * * *');
     }
 
     /**

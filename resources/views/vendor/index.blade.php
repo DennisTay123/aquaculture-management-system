@@ -30,7 +30,6 @@
                                 <a href="{{ route('vendors.create') }}" class="btn btn-primary">Add new vendor</a>
                             </div>
                         </div>
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -58,12 +57,15 @@
                                             <td>
                                                 <a href="{{ route('vendors.show', $vendor->id) }}"
                                                     class="btn btn-info">Details</a>
-                                                <form action="{{ route('vendors.destroy', $vendor->id) }}" method="POST"
-                                                    style="display:inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
+
+                                                @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Manager')
+                                                    <form action="{{ route('vendors.destroy', $vendor->id) }}" method="POST"
+                                                        style="display:inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

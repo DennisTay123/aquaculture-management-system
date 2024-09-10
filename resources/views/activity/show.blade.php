@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'users'
+    'elementActive' => 'activity'
 ])
 
 @section('content')
@@ -19,75 +19,80 @@
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col-8">
-                                <h3 class="mb-0">User Details</h3>
+                            <div class="col-6">
+                                <h3 class="mb-0">Activity Details</h3>
                             </div>
-                            <div class="col-4 text-right">
+                            <div class="col-6 text-right">
                                 <button id="edit-button" class="btn btn-primary">Edit</button>
-                                <a href="{{ route('users.index') }}" id="back-button" class="btn btn-primary">Back to
+                                <a href="{{ route('activity.index') }}" id="back-button" class="btn btn-primary">Back to
                                     list</a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="user-form" action="{{ route('users.update', $user->id) }}" method="POST">
+                        <form id="activity-form" action="{{ route('activity.update', $activity->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="table-responsive">
                                 <table class="table align-items-center table-flush">
                                     <tr>
                                         <th>ID</th>
-                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $activity->id }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Activity</th>
                                         <td>
-                                            <span class="view-mode">{{ $user->name }}</span>
-                                            <input type="text" name="name" class="form-control edit-mode"
-                                                value="{{ $user->name }}" style="display:none;">
+                                            <span class="view-mode">{{ $activity->activity }}</span>
+                                            <input type="text" name="activity" class="form-control edit-mode"
+                                                value="{{ $activity->activity }}" style="display:none;">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Role</th>
+                                        <th>Tank ID</th>
                                         <td>
-                                            <span class="view-mode">{{ $user->role }}</span>
-                                            <select name="role" class="form-control edit-mode" style="display:none;">
-                                                <option value="Admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin
-                                                </option>
-                                                <option value="Manager" {{ $user->role == 'manager' ? 'selected' : '' }}>
-                                                    Manager
-                                                </option>
-                                                <option value="Employee" {{ $user->role == 'employee' ? 'selected' : '' }}>Employee</option>
-                                            </select>
+                                            <span class="view-mode">{{ $activity->tank_id }}</span>
+                                            <input type="text" name="tank_id" class="form-control edit-mode"
+                                                value="{{ $activity->tank_id }}" style="display:none;">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Email</th>
+                                        <th>Employee ID</th>
                                         <td>
-                                            <span class="view-mode">{{ $user->email }}</span>
-                                            <input type="email" name="email" class="form-control edit-mode"
-                                                value="{{ $user->email }}" style="display:none;">
+                                            <span class="view-mode">{{ $activity->employee_id }}</span>
+                                            <input type="text" name="employee_id" class="form-control edit-mode"
+                                                value="{{ $activity->employee_id }}" style="display:none;">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Contact Number</th>
+                                        <th>Feed Type</th>
                                         <td>
-                                            <span class="view-mode">{{ $user->contact_number }}</span>
-                                            <input type="text" name="contact_number" class="form-control edit-mode"
-                                                value="{{ $user->contact_number }}" style="display:none;">
+                                            <span class="view-mode">{{ $activity->feed_type }}</span>
+                                            <input type="text" name="feed_type" class="form-control edit-mode"
+                                                value="{{ $activity->feed_type }}" style="display:none;">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Address</th>
+                                        <th>Quantity</th>
                                         <td>
-                                            <span class="view-mode">{{ $user->address }}</span>
-                                            <input type="text" name="address" class="form-control edit-mode"
-                                                value="{{ $user->address }}" style="display:none;">
+                                            <span class="view-mode">{{ $activity->quantity }}</span>
+                                            <input type="number" step="0.01" name="quantity"
+                                                class="form-control edit-mode" value="{{ $activity->quantity }}"
+                                                style="display:none;">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Created At</th>
-                                        <td>{{ $user->created_at->format('Y-m-d') }}</td>
+                                        <th>Unit Measurement</th>
+                                        <td>
+                                            <span class="view-mode">{{ $activity->unit_measurement }}</span>
+                                            <input type="text" name="unit_measurement" class="form-control edit-mode"
+                                                value="{{ $activity->unit_measurement }}" style="display:none;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date Recorded</th>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($activity->created_at)->format('Y-m-d') }}
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -136,7 +141,6 @@
         if (alert) {
             alert.classList.remove('show');
             alert.classList.add('hide');
-            // Remove the alert from the DOM after the transition
             window.setTimeout(function () {
                 alert.parentNode.removeChild(alert);
             }, 500);
