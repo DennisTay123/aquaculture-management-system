@@ -46,7 +46,7 @@
                 </div>
                 <div class="card-body text-center">
                     <iframe width="450" height="260" style="border: 1px solid #cccccc;"
-                        src="https://thingspeak.com/channels/2210102/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Ammonia&type=line&yaxis=mg%2FL&yaxismax=1&yaxismin=0"></iframe>
+                        src="https://thingspeak.com/channels/2588289/charts/4?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Ammonia&type=line"></iframe>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="card-body text-center">
                     <iframe width="450" height="260" style="border: 1px solid #cccccc;"
-                        src="https://thingspeak.com/channels/2210102/widgets/839027"></iframe>
+                        src="https://thingspeak.com/channels/2588289/widgets/907323"></iframe>
                 </div>
             </div>
         </div>

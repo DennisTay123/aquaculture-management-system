@@ -13,16 +13,16 @@ class RegistrationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $token;
+    public $registrationLink;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($registrationLink)
     {
-        $this->token = $token;
+        $this->registrationLink = $registrationLink;
     }
 
     /**
@@ -66,7 +66,9 @@ class RegistrationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.registration')
-            ->with(['token' => $this->token]);
+        return $this->subject('Complete Your Registration')
+            ->markdown('emails.registration')
+            ->with('registrationLink', $this->registrationLink);
+
     }
 }

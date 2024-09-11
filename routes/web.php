@@ -88,6 +88,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Admin']], function () {
 	// Registration routes accessible by Admin/Manager
 	Route::get('register/initiate', [RegisterController::class, 'showInitiateRegistrationForm'])->name('register.initiate');
 	Route::post('register/initiate', [RegisterController::class, 'sendRegistrationLink'])->name('register.initiate.send');
-	Route::get('register/complete/{token}', [RegisterController::class, 'showCompleteRegistrationForm'])->name('register.complete');
-	Route::post('register/complete/{token}', [RegisterController::class, 'completeRegistration'])->name('register.complete.store');
 });
+
+Route::get('register/complete/{token}', [RegisterController::class, 'showCompleteRegistrationForm'])->name('register.complete');
+Route::post('register/complete/{token}', [RegisterController::class, 'completeRegistration'])->name('register.complete.store');

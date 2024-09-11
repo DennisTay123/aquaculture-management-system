@@ -102,10 +102,15 @@ class RegisterController extends Controller
             ['token' => $token, 'expired_at' => $expired_at]
         );
 
-        Mail::to($email)->send(new RegistrationMail($token));
+        // Generate the registration link
+        $registrationLink = route('register.complete', ['token' => $token]);
+
+        // Send the email with the registration link
+        Mail::to($email)->send(new RegistrationMail($registrationLink));
 
         return redirect()->back()->with('status', 'Registration link sent!');
     }
+
 
 
     public function showCompleteRegistrationForm($token)

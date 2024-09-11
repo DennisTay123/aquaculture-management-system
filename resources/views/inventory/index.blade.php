@@ -28,9 +28,10 @@
                         </div>
                     </div>
                     <div class="card-body">
+
                         <form method="GET" action="{{ route('inventories.index') }}">
                             <div class="row">
-
+                                <!-- Brand Filter Dropdown -->
                                 <div class="col-md-3">
                                     <label for="brand"><strong>Filter by Brand:</strong></label>
                                     <select name="brand" class="form-control">
@@ -42,6 +43,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="col-md-3">
                                     <label for="vendor_id"><strong>Filter by Vendor:</strong></label>
                                     <select name="vendor_id" class="form-control">
@@ -68,18 +70,21 @@
                             </div>
 
                             <div class="row mt-2">
-
+                                <!-- Search Bar -->
                                 <div class="col-md-3">
                                     <label for="search"><strong>Search:</strong></label>
                                     <input type="text" name="search" class="form-control" placeholder="Search..."
                                         value="{{ request('search') }}">
                                 </div>
+                                <!-- Filter and Search Button -->
                                 <div class="col-md-6 d-flex" style="margin-top: 20px; margin-bottom: 0;">
                                     <button class="btn btn-primary mr-2" type="submit">Search</button>
                                     <a href="{{ route('inventories.index') }}" class="btn btn-secondary">Clear</a>
                                 </div>
                             </div>
+
                         </form>
+
                         <div class="table-responsive">
                             <table class="table align-items-center table-flush">
                                 <thead class="text-primary">

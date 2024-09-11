@@ -1,6 +1,6 @@
 @extends('layouts.app', [
-    'class' => '',
-    'elementActive' => 'register'
+    'class' => 'register-page',
+    'backgroundImagePath' => 'img/bg/jan-sendereks.jpg'
 ])
 
 @section('content')

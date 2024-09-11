@@ -88,7 +88,7 @@
                             </p>
                         </a>
                     </li> -->
-                    <li class="nav-item btn-rotate dropdown">
+                    <!-- <li class="nav-item btn-rotate dropdown">
                         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="nc-icon nc-bell-55"></i>
@@ -101,7 +101,7 @@
                             <a class="dropdown-item" href="#">{{ __('Another action') }}</a>
                             <a class="dropdown-item" href="#">{{ __('Something else here') }}</a>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item btn-rotate dropdown">
                         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink2"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

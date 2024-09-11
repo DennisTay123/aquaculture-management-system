@@ -127,9 +127,7 @@
                                     </tr>
                                     <tr>
                                         <th>Date Recorded</th>
-                                        <td>
-                                            <span class="view-mode">{{ $inventory->created_at->format('Y-m-d') }}</span>
-                                        </td>
+                                        <td>{{ $inventory->created_at->format('Y-m-d') }}</td>
                                     </tr>
                                 </table>
                             </div>
