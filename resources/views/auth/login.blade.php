@@ -3,6 +3,9 @@
     'backgroundImagePath' => 'img/bg/fabio-mangione.jpg'
 ])
 
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<script src="{{ asset('js/app.js') }}"></script>
+
 @section('content')
     <div class="content">
         <div class="container">
